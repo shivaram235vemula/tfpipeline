@@ -5,17 +5,18 @@ terraform {
       version = "5.64.0"
     }
   }
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "shivaram235vemula"
+
+    workspaces {
+      name = "tfpipeline"
+    }
+  }
 }
 
 provider "aws" {
   region = "ap-south-1"
 }
 
-terraform {
-  backend "s3" {
-    bucket = "timingremotestatebucket"
-    key    = "LockID"
-    region = "ap-south-1"
-    use_lockfile = true
-  }
-}
+
